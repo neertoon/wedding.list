@@ -20,6 +20,7 @@ class Main extends CI_Controller {
 	 */
 	public function index()
 	{
+	    sdfsdf
         $this->load->model('Napisy');
         /** @var Napisy $napisyObj */
         $napisyObj = $this->Napisy;
