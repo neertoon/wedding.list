@@ -74,9 +74,9 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => $_SERVER['mysql_host'],
-	'username' => $_SERVER['mysql_username'],
-	'password' => $_SERVER['mysql_password'],
+	'hostname' => $_SERVER['mysql_host'] ?? $_ENV['mysql_host'],
+	'username' => $_SERVER['mysql_username'] ?? $_ENV['mysql_username'],
+	'password' => $_SERVER['mysql_password'] ?? $_ENV['mysql_password'],
 	'database' => 'lista_piosenek',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
