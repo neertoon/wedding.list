@@ -14,7 +14,7 @@ class Youtube extends CI_Model
     }
     
     public function getIdPlaylist() {
-        return $_SERVER['youtube_playlist'];
+        return $_SERVER['youtube_playlist'] ?? $_ENV['youtube_playlist'];
     }
 
     public function index() {
