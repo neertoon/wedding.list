@@ -153,4 +153,12 @@ class Main extends CI_Controller {
             throw new Exception($this->Napisy->daj('blad_utwor_istnieje'));
         }
     }
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->load->model('Youtube');
+        /** @var Youtube $youtube */
+        $youtube = $this->Youtube;
+    }
 }
