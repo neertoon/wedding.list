@@ -9,8 +9,57 @@ class Youtube extends CI_Model
 
     public function __construct()
     {
+        $b = file_get_contents('php-yt-oauth2.json');
+        $token = json_decode($b, true);
+        if (empty($_SESSION['token'])) {
+            $tokenNew = $this->refreshToken();
+            $tokenNewArray = json_decode($tokenNew, true);
+            $token['access_token'] = $tokenNewArray['access_token'];
+            $token['expires_in'] = $tokenNewArray['expires_in'];
+            $token['created'] = time();
+            $_SESSION['token'] = json_encode($token);
+            $_SESSION['access_token'] = $tokenNewArray['access_token'];
+        }
+
         $client = $this->getClient();
         $this->service = new Google_Service_YouTube($client);
+    }
+    
+    public function refreshToken() {
+        $a = file_get_contents('client_secrets.json');
+        $json = json_decode($a, true);
+
+        $b = file_get_contents('php-yt-oauth2.json');
+        $token = json_decode($b, true);
+
+        $refresh = [
+            'client_id' => $json['web']['client_id'],
+            'client_secret' => $json['web']['client_secret'],
+            'grant_type' => 'refresh_token',
+            'refresh_token' => $token['refresh_token'],
+        ];
+
+        $this->curl = curl_init();
+
+        curl_setopt($this->curl, CURLOPT_URL,"https://accounts.google.com/o/oauth2/token");
+
+        curl_setopt($this->curl, CURLOPT_CONNECTTIMEOUT, 10); //max czas po³¹czenia
+        curl_setopt($this->curl, CURLOPT_TIMEOUT, 20); //max czas pobierania/dzia³ania
+        curl_setopt($this->curl, CURLOPT_HTTPHEADER, ['Content-Type: application/x-www-form-urlencoded']);
+        curl_setopt($this->curl, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($this->curl, CURLOPT_POST, 1);
+        curl_setopt($this->curl, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($this->curl, CURLOPT_SSL_VERIFYHOST, false);
+        curl_setopt($this->curl, CURLINFO_HEADER_OUT, true);
+        
+
+        curl_setopt($this->curl, CURLOPT_POSTFIELDS, http_build_query($refresh));
+
+
+        $resultJson = curl_exec($this->curl);
+        $curlOpt = curl_getinfo($this->curl);
+        
+        return $resultJson;
     }
     
     public function getIdPlaylist() {
@@ -53,20 +102,18 @@ class Youtube extends CI_Model
         $client->setAccessType('offline');
 
         // Load previously authorized credentials from a file.
-        $credentialsPath = self::CREDENTIALS_PATH;
-        if (file_exists($credentialsPath)) {
-            $accessToken = file_get_contents($credentialsPath);
-        } else {
+//        $credentialsPath = self::CREDENTIALS_PATH;
+        if (empty($_SESSION['access_token'])) {
             throw new Exception("Brak tokenu autoryzuj¹cego");
         }
 
-        $client->setAccessToken($accessToken);
+        $client->setAccessToken($_SESSION['token']);
 
         // Refresh the token if it's expired.^M
-        if ($client->isAccessTokenExpired()) {
-            $client->refreshToken($client->getRefreshToken());
-            file_put_contents($credentialsPath, json_encode($client->getAccessToken()));
-        }
+//        if ($client->isAccessTokenExpired()) {
+//            $client->refreshToken($client->getRefreshToken());
+//            file_put_contents($credentialsPath, json_encode($client->getAccessToken()));
+//        }
 
         return $client;
     }
