@@ -38,6 +38,4 @@ class Video extends CI_Controller
         $json = json_decode($a, true);
         var_export($json);
     }
-    
-    //TAKI TEST
 }
