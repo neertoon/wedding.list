@@ -320,6 +320,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         text-align: justify;
         font-size: 1.2em;
     }
+    
+    .info-panel {
+        background-color: #CFD2B2;
+        /*background-color: #CF5C36;*/
+        padding: 10px;
+        font-weight: bold;
+        font-size: 22px;
+    }
+
+    .info-panel .error {
+        color: #CF5C36;
+    }
 
     @media screen and (max-width: 600px) {
         #nazwa {
@@ -420,6 +432,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <div style="margin-bottom: 5px;"></div>
     <a id="info"><i class="fa fa-info-circle fa-3x" aria-hidden="true"></i></a>
     <a style="color: #B01010; cursor:pointer;" title="Lista youtube" href="https://www.youtube.com/watch?v=e7lcimljm3k&list=<?php echo $youtube_list; ?>" target="_blank"><i class="fa fa-youtube fa-3x" aria-hidden="true"></i></a>
+
+    <p class="info-panel"><span class="error"><i class="fa fa-exclamation-circle" aria-hidden="true"></i> <?php echo $napisy['Attention']; ?>: </span><?php echo $napisy['TitileWilGetFromYTLink']; ?></p>
 </div>
 
 <div id="container">

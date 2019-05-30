@@ -34,6 +34,8 @@ class Main extends CI_Controller {
                 'dod_wykonawca' => $napisyObj->daj('dod_wykonawca'),
                 'info_box' => $napisyObj->daj('info_box'),
                 'youtube_link' => $napisyObj->daj('youtube_link'),
+                'Attention' => $napisyObj->daj('Attention'),
+                'TitileWilGetFromYTLink' => $napisyObj->daj('TitileWilGetFromYTLink'),
             ),
             'youtube_list' => $this->Youtube->getIdPlaylist(),
             'widok' => '',//$this->load->view('nazwa', [], true),

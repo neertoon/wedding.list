@@ -7,14 +7,14 @@ class Napisy extends CI_Model
     public function __construct()
     {
         $this->napisy['pl'] = array(
-            'szukaj' => 'SZUKAJ/DODAJ',       
-            'osoba' => 'TWOJE IMIĘ',       
+            'szukaj' => 'SZUKAJ',       
+            'osoba' => 'TWOJE IMIĘ *',       
             'dod_wykonawca' => 'Dodaj wykonawcę',       
             'dod_osoba' => 'Dodaj jako utwór',       
             'wykonawcy' => 'WYKONAWCY',       
             'utwory' => 'UTWORY',       
             'glosuj' => 'Głosuj',
-            'youtube_link' => 'LINK DO YOUTUBE',
+            'youtube_link' => 'LINK DO YOUTUBE *',
             'format_youtube' => 'Niewłaściwy format linku youtube',
             'info_box' => 'Drodzy goście,<br/>
 Wesele nie może się obejść was drodzy goście a ponieważ chcemy, 
@@ -25,7 +25,9 @@ Wesele nie może się obejść was drodzy goście a ponieważ chcemy,
     - Jeśli znalazłeś link do utworu na youtube dodaj go<br/>
     - Nie zapomnij podać swojego imienia.<br/>
     - Pozdrawiamy!<br/>
-    - Wszelkie pytania odnośnie działania strony piszcie na neertoon@gmail.com'
+    - Wszelkie pytania odnośnie działania strony piszcie na neertoon@gmail.com',
+            'Attention' => 'UWAGA',
+            'TitileWilGetFromYTLink' => 'Nie trzeba podawać tytułu. Tytuł uzupełni się na podstawie linku YouTube',
         );
 
         $this->napisy['pl']['blad_brak_osoby'] = "Uzupełnij pole ".$this->napisy['pl']['osoba'];
@@ -39,14 +41,14 @@ Wesele nie może się obejść was drodzy goście a ponieważ chcemy,
 
         // ANGIELSKI
         $this->napisy['en'] = array(
-            'szukaj' => 'SEARCH/ADD',
-            'osoba' => 'YOUR NAME',
+            'szukaj' => 'SEARCH',
+            'osoba' => 'YOUR NAME *',
             'dod_wykonawca' => 'Add as artist',
             'dod_osoba' => 'Add as song',
             'wykonawcy' => 'ARTISTS',
             'utwory' => 'SONGS',
             'glosuj' => 'Vote',
-            'youtube_link' => 'LINK TO YOUTUBE',
+            'youtube_link' => 'LINK TO YOUTUBE *',
             'format_youtube' => 'Wrong youtube link format',
             'info_box' => 'Dear guests,<br/>
 The wedding party wouldn\'t be possible without you and because we want you to enjoy yourselves with us on our special day
@@ -55,7 +57,9 @@ The wedding party wouldn\'t be possible without you and because we want you to e
     - If it does - vote for it, if not - you can add it<br/>
     - If you found a song on youtube you can add a link to it<br/>
     - Don\'t forget to add your name<br/>
-    - Have a problem with this website? Write to neertoon@gmail.com'
+    - Have a problem with this website? Write to neertoon@gmail.com',
+            'Attention' => 'ATTENTION',
+            'TitileWilGetFromYTLink' => 'There is no need to put title. The title will be complemented by the YouTube link',
         );
 
         $this->napisy['en']['blad_brak_osoby'] = "Fill field ".$this->napisy['en']['osoba'];
