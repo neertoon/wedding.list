@@ -155,7 +155,12 @@ class Youtube extends CI_Model
 //        echo "</pre>";
         
         foreach ($idVideo as $videoId) {
-            $this->dodajFilmDoPlaylisty($videoId);
+            try {
+                $this->dodajFilmDoPlaylisty($videoId);    
+            } catch (Google_Service_Exception $error) {
+                echo $videoId.': '.$error->getMessage()."<br>";
+            }
+            
         }
         
         echo "DODANO ".count($idVideo)." FILMOW <br />";
