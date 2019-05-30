@@ -100,6 +100,13 @@ class Main extends CI_Controller {
         $element->rodzaj = $element->getRodzajUtwor();
         $element->dodajacy = $_POST['dodajacy'];
         $element->link_youtube = $_POST['link_youtube'];
+
+        $this->load->model('Youtube');
+        /** @var Youtube $youtube */
+        $youtube = $this->Youtube;
+        $videoData = $youtube->getVideoInfo($element->link_youtube);
+        $element->nazwa = $videoData['modelData']['items'][0]['snippet']['title'];
+        
         try {
             $this->czyUtworIstnieje();
             $element->zapisz();

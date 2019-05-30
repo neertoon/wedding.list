@@ -165,6 +165,14 @@ class Youtube extends CI_Model
         
         echo "DODANO ".count($idVideo)." FILMOW <br />";
     }
+    
+    public function getVideoInfo($link) {
+        $videoId = $this->dajIdFilmu($link);
+
+        $videoData = $this->service->videos->listVideos('snippet,contentDetails', array('id' => $videoId));
+        
+        return $videoData;
+    }
 
     public function dajIdFilmu($link) {
         $matches = array();

@@ -20,6 +20,19 @@ class Video extends CI_Controller
         $youtube->kasujOrazDodajWszystkieFilmy();
     }
     
+    public function getVideoData() {
+        //?link=
+        $this->load->model('Youtube');
+        /** @var Youtube $youtube */
+        $youtube = $this->Youtube;
+        
+        $data = $youtube->getVideoInfo($_GET['link']);
+        
+        echo "<pre>";
+        var_export($data);
+        echo "</pre>";
+    }
+    
     public function testapitoken() {
         $this->load->model('Youtube');
         /** @var Youtube $youtube */
