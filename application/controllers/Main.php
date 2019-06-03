@@ -107,7 +107,7 @@ class Main extends CI_Controller {
         /** @var Youtube $youtube */
         $youtube = $this->Youtube;
         $videoData = $youtube->getVideoInfo($element->link_youtube);
-        $element->nazwa = $videoData['modelData']['items'][0]['snippet']['title'];
+        $element->nazwa = $videoData['modelData']['items'][0]['snippet']['title'] ?? $videoData['items'][0]['snippet']['title'];
         
         try {
             $this->czyUtworIstnieje();
