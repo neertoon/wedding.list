@@ -162,6 +162,18 @@ class Main extends CI_Controller {
             throw new Exception($this->Napisy->daj('blad_utwor_istnieje'));
         }
     }
+    
+    public function getSongList() {
+        $sel = "SELECT e.nazwa AS nazwa
+                  , e.link_youtube
+                FROM element_muzyczny AS e
+                ORDER BY tms ASC";
+        $wpisy = $this->db->query($sel);
+
+        foreach ($wpisy->result() as $wpis) {
+            echo $wpis->nazwa.';'.$wpis->link_youtube.";<br>";
+        }
+    }
 
     public function __construct()
     {
